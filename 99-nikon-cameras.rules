@@ -1,0 +1,18 @@
+# /etc/udev/rules.d/99-nikon-cameras.rules
+# Auto-trigger camera-import when Nikon D7500 or Z5 is plugged in via USB.
+#
+# Nikon vendor ID: 04b0
+# D7500 product ID: 0440
+# Z5 product ID: 0448
+#
+# Install:
+#   sudo cp 99-nikon-cameras.rules /etc/udev/rules.d/
+#   sudo udevadm control --reload-rules
+
+# Nikon D7500
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="04b0", ATTR{idProduct}=="0440", \
+  RUN+="/usr/local/bin/camera-import.sh d7500"
+
+# Nikon Z5
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="04b0", ATTR{idProduct}=="0448", \
+  RUN+="/usr/local/bin/camera-import.sh z5"
